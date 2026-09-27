@@ -9,7 +9,8 @@
   --ink: #14131a;
   --muted: #625d57;
   --line: #d6cdbe;
-  --dot: rgba(20, 19, 26, .11);
+  --dot: rgba(20, 19, 26, .22);
+  --gridline: rgba(20, 19, 26, .07);
   --accent: #f29b1d;        /* the plus in the wordmark */
   --accent-deep: #a95f05;   /* same hue, dark enough for small text on paper */
   --accent-ink: #14131a;
@@ -32,7 +33,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #101015; --paper-2: #16161d; --card: #17171e;
-    --ink: #ece7dc; --muted: #9d978e; --line: #2b2a34; --dot: rgba(236, 231, 220, .08);
+    --ink: #ece7dc; --muted: #9d978e; --line: #2b2a34; --dot: rgba(236, 231, 220, .16); --gridline: rgba(236, 231, 220, .05);
     --accent: #f5a52c; --accent-deep: #f5a52c; --accent-ink: #14131a; --accent-soft: #3a2a12; --warn: #8fb3c9;
     --ledger-bg: #07070a; --hard: 4px 4px 0 var(--line); --hard-ink: 3px 3px 0 var(--accent-deep);
     color-scheme: dark;
@@ -40,7 +41,7 @@
 }
 :root[data-theme="dark"] {
   --paper: #101015; --paper-2: #16161d; --card: #17171e;
-  --ink: #ece7dc; --muted: #9d978e; --line: #2b2a34; --dot: rgba(236, 231, 220, .08);
+  --ink: #ece7dc; --muted: #9d978e; --line: #2b2a34; --dot: rgba(236, 231, 220, .16); --gridline: rgba(236, 231, 220, .05);
   --accent: #f5a52c; --accent-deep: #f5a52c; --accent-ink: #14131a; --accent-soft: #3a2a12; --warn: #8fb3c9;
   --ledger-bg: #07070a; --hard: 4px 4px 0 var(--line); --hard-ink: 3px 3px 0 var(--accent-deep);
   color-scheme: dark;
@@ -51,8 +52,12 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.6;
   background-color: var(--paper);
-  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
-  background-size: 24px 24px;
+  background-image:
+    radial-gradient(var(--dot) 1.2px, transparent 1.6px),
+    linear-gradient(var(--gridline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gridline) 1px, transparent 1px);
+  background-size: 24px 24px, 120px 120px, 120px 120px;
+  background-position: 12px 12px, 0 0, 0 0;
   counter-reset: sec;
 }
 img, svg { max-width: 100%; display: block; }
