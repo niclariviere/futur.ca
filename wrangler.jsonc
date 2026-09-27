@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "futur-ca",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*", "/", "/lang/*"]
+  },
+  "observability": { "enabled": true },
+  "routes": [
+    { "pattern": "futur.ca", "custom_domain": true },
+    { "pattern": "www.futur.ca", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  // Optional backup of every lead. Create with: wrangler kv namespace create LEADS
+  // "kv_namespaces": [{ "binding": "LEADS", "id": "..." }]
+}

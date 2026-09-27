@@ -1,0 +1,19 @@
+# FUTUR inc.
+
+> A one-person studio in Québec that designs, deploys and operates AI agents which act inside small businesses (5 to 50 people), under an explicit governance ladder: paper, supervised, autonomous. Run by Nic Larivière. Works in French and English.
+
+## How the offer works
+- Every engagement starts at the paper stage: the agent proposes, a human approves each action from Slack, Telegram or WhatsApp.
+- Promotion to supervised (acts within written limits, every action logged) and autonomous (runs, with a ledger and a panic switch) happens on evidence.
+- Agents connect to a client's tools through open protocols such as MCP. FUTUR operates and monitors them after deployment.
+
+## Proof
+- Legion: a constellation of trading agents that has run live on the founder's own capital since April 2026, using the same ladder.
+- wemake.music: a platform for musicians, in production, self-hosted, with payments and zero-downtime deploys.
+
+## Pages
+- English: https://www.futur.ca/
+- Français: https://www.futur.ca/fr/
+
+## Contact
+- Humans and agents alike: POST https://www.futur.ca/api/contact with JSON {name, email, company?, channel?, process, lang} and Accept: application/json.
