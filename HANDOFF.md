@@ -18,12 +18,14 @@ Why this and not "bot development": the thing that stops a business owner from u
 - 2026-09-24: audit, repositioning, rebuild as plain HTML + Worker, Telegram form, deploy to Cloudflare, DNS moved off Netlify.
 - 2026-09-26: design pass (console on paper), FU+UR wordmark and orange accent, visible grid.
 - 2026-09-27/28: Nic's French copy revisions from an annotated PDF; EN kept intentionally divergent except the wemake "1,000 true fans" line.
+- 2026-09-28: first spam through the form (LLM-written text echoing the page, throwaway email domain, six-day-old link domain, AWS IP). Walked past the honeypot. Added the anti-spam layers below.
 
 ## Infrastructure
 - Cloudflare account `2da0d656…`, Worker `futur-ca`, custom domains `futur.ca` + `www.futur.ca`. workers.dev and preview URLs disabled.
 - DNS zone on Cloudflare. Web records are managed by the Worker's custom domains. Mail records (iCloud MX, DKIM, SPF) untouched.
 - Telegram: leads arrive in Nic's private chat with the bot (chat id is a 10-digit number, stored as a secret). Replying in that chat reaches nobody; answer leads by email.
 - No analytics, no KV bound yet. `LEADS` KV is scaffolded in the worker and commented out in `wrangler.jsonc`.
+- Form anti-spam, in `src/worker.ts`, cheapest first: honeypot field `website`; hidden `t` set by the page on load, submissions under 4 s are dropped; `Sec-Fetch-Site: cross-site` refused; no links in name/company/process (regex on `://`, `www.`, bare domain with a common TLD); rate limit binding `CONTACT_RL`, 3 sends per IP per minute, counted after the free checks; email domain must have MX or A (DNS over HTTPS, fails open). Honeypot and timing return a quiet `ok` because a human cannot trip them; every other rule shows the visitor an error. Anything URL-like that still gets through is defanged before Telegram. Drops and rejections are logged with the reason and IP, visible in the Worker's observability logs. No captcha, no third-party script, curl still works. Escalation if it keeps up: Cloudflare Turnstile on the form, at the cost of a script.
 
 ## Known gaps / next candidates
 1. **Outreach.** The page is done enough. The step that decides whether the offer is real is five conversations with owners of 5–50 person businesses. Nic's Reelrail playbook (`~/postproductor/ops/`) has the outreach shape. This has been the unfinished stage on every previous venture; name it.

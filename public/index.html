@@ -201,6 +201,7 @@
     </div>
     <form method="post" action="/api/contact" id="contact">
       <input type="hidden" name="lang" value="en">
+      <input type="hidden" name="t" value="">
       <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
       <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
@@ -233,6 +234,7 @@
 (function () {
   var form = document.getElementById('contact');
   var status = document.getElementById('status');
+  form.elements.t.value = String(Date.now());
   var params = new URLSearchParams(location.search);
   if (params.get('error')) { status.textContent = params.get('error'); status.className = 'status err'; }
   form.addEventListener('submit', function (e) {
