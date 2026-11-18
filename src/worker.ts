@@ -85,10 +85,10 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
   }
 
   const lead: Lead = {
-    name: clip(fields.name, 120),
-    email: clip(fields.email, 200),
-    company: clip(fields.company, 160),
-    channel: clip(fields.channel, 60),
+    name: oneLine(fields.name, 120),
+    email: oneLine(fields.email, 200),
+    company: oneLine(fields.company, 160),
+    channel: knownChannel(fields.channel),
     process: clip(fields.process, 3000),
     lang,
     receivedAt: new Date().toISOString(),
@@ -149,7 +149,30 @@ function validate(lead: Lead, lang: Lang): string | null {
   if (lead.process.trim().length < 10) return t(lang, "needProcess");
   // Contact-form spam exists to deliver a link. Real first messages do not need one.
   if (hasLink(lead.name) || hasLink(lead.company) || hasLink(lead.process)) return t(lang, "noLinks");
+  // A real description is a sentence, not one token ("aaaaaaaaaa") and not another alphabet.
+  if (lead.process.split(/\s+/).filter(Boolean).length < 2) return t(lang, "needProcess");
+  if (mostlyForeignScript(lead.name + " " + lead.process)) return t(lang, "latinOnly");
   return null;
+}
+
+/** The channel field is a dropdown on the page. Anything else is not a real choice. */
+const CHANNELS = ["Slack", "Microsoft Teams", "Telegram", "WhatsApp", "Email only", "Other"];
+function knownChannel(value: string | undefined): string {
+  const v = oneLine(value, 60);
+  return CHANNELS.find((c) => c.toLowerCase() === v.toLowerCase()) ?? "";
+}
+
+/** Collapse every run of whitespace, including newlines, so a field cannot forge extra lines in the Telegram message. */
+function oneLine(value: string | undefined, max: number): string {
+  return (value ?? "").toString().replace(/\s+/g, " ").trim().slice(0, max);
+}
+
+/** FUTUR works in French and English. A message mostly in Cyrillic, CJK, Arabic etc. is not a lead. */
+function mostlyForeignScript(text: string): boolean {
+  const letters = text.match(/\p{L}/gu) ?? [];
+  if (letters.length < 8) return false;
+  const latin = letters.filter((ch) => /\p{Script=Latin}/u.test(ch)).length;
+  return latin / letters.length < 0.6;
 }
 
 const LINK_RE =
@@ -280,6 +303,7 @@ const STRINGS = {
     noLinks: "Please leave links out for now. I will ask for them when we talk.",
     slowDown: "Too many messages from your connection. Please wait a minute and try again.",
     rejected: "This form only accepts messages sent from futur.ca.",
+    latinOnly: "Please write in English or French.",
     deliveryFailed: "The message could not be delivered. Please try again in a minute.",
   },
   fr: {
@@ -289,6 +313,7 @@ const STRINGS = {
     noLinks: "Laissez les liens de côté pour l'instant. Je vous les demanderai quand on se parlera.",
     slowDown: "Trop de messages depuis votre connexion. Attendez une minute et réessayez.",
     rejected: "Ce formulaire n'accepte que les messages envoyés depuis futur.ca.",
+    latinOnly: "Écrivez en français ou en anglais, s'il vous plaît.",
     deliveryFailed: "Le message n'a pas pu être livré. Réessayez dans une minute.",
   },
 } as const;
