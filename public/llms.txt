@@ -15,5 +15,9 @@
 - English: https://www.futur.ca/
 - Français: https://www.futur.ca/fr/
 
+## Notes
+- The Dragon's War-Chant (EN): https://www.futur.ca/notes/dragons-war-chant/ — a personal essay on tolerance for ambiguity, and how the studio takes on work.
+- Le chant de guerre du dragon (FR): https://www.futur.ca/fr/notes/le-chant-de-guerre-du-dragon/
+
 ## Contact
 - Humans and agents alike: POST https://www.futur.ca/api/contact with JSON {name, email, company?, channel?, process, lang} and Accept: application/json.

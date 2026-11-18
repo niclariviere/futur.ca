@@ -232,3 +232,32 @@ footer a { color: inherit; }
   html { scroll-behavior: auto; }
   .btn, .ledger tr, .ledger::after { transition: none; animation: none; }
 }
+
+/* essay pages (/notes/…): one reading column, the site's paper and ink.
+   Tape numbers play the role the runbook numbers play on the home page. */
+.essay-head { padding-top: clamp(3rem, 8vw, 6rem); padding-bottom: 1rem; }
+.essay-head h1 { max-width: 14ch; }
+.kicker-plain { font-family: var(--mono); font-size: .74rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-deep); margin: 0 0 1.4rem; }
+.byline { font-family: var(--mono); font-size: .74rem; color: var(--muted); letter-spacing: .04em; margin-top: 1.4rem; }
+.prose { max-width: 720px; padding-bottom: clamp(3rem, 8vw, 6rem); }
+.prose p { max-width: none; font-size: 1.08rem; }
+.prose strong { font-weight: 600; box-shadow: inset 0 -.4em 0 var(--accent-soft); }
+.tape { padding-top: 2.4rem; margin-top: 2.4rem; border-top: 1px solid var(--line); }
+.tape:first-child { border-top: 0; margin-top: 1.6rem; }
+.tapeno { display: block; font-family: var(--mono); font-size: .74rem; font-weight: 600; letter-spacing: .12em; color: var(--accent-deep); margin-bottom: .8rem; }
+.tape h2 { font-size: clamp(1.5rem, 3.6vw, 2.1rem); }
+.tape .option { padding-left: 1.4rem; text-indent: -1.4rem; }
+.tape .option strong { font-family: var(--mono); box-shadow: none; color: var(--accent-deep); }
+.said { margin: 1.6rem 0; padding: .3rem 0 .3rem 1.2rem; border-left: 6px solid var(--accent); font-family: var(--mono); font-size: 1rem !important; line-height: 1.5; }
+.screen { margin: 1.6rem 0; padding: 1.1rem 1.3rem; background: var(--ledger-bg); color: var(--ledger-ink); border: 1px solid var(--ink); border-radius: var(--r); box-shadow: var(--hard-ink); font-family: var(--mono); font-size: .86rem; line-height: 1.8; overflow-x: auto; }
+.screen .dim { color: var(--ledger-dim); }
+.screen .hi { color: var(--ledger-ok); font-weight: 600; }
+.machine { margin: 1.8rem 0; background: var(--card); border: 1px solid var(--ink); border-radius: var(--r); box-shadow: var(--hard); overflow: hidden; }
+.machine img { width: 100%; height: auto; }
+.machine figcaption { font-family: var(--mono); font-size: .72rem; line-height: 1.6; color: var(--muted); padding: .8rem 1rem .9rem; border-top: 1px solid var(--line); }
+.machine figcaption a { color: inherit; }
+.tape-end .final { font-family: var(--mono); font-size: 1.1rem !important; line-height: 1.5; color: var(--accent-deep); margin-top: 1.4rem; }
+.bridge { margin-top: 3rem; padding: 1.6rem 1.6rem 1.8rem; border: 1px solid var(--ink); border-left: 6px solid var(--accent); background: var(--paper-2); border-radius: var(--r); box-shadow: var(--hard); }
+.bridge .tapeno { color: var(--ink); }
+.bridge p { font-size: 1.02rem; }
+.bridge .actions { margin-top: 1.4rem; }

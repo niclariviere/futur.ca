@@ -2,4 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://www.futur.ca/</loc><xhtml:link rel="alternate" hreflang="fr" href="https://www.futur.ca/fr/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.futur.ca/"/></url>
   <url><loc>https://www.futur.ca/fr/</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.futur.ca/"/><xhtml:link rel="alternate" hreflang="fr" href="https://www.futur.ca/fr/"/></url>
+  <url><loc>https://www.futur.ca/notes/dragons-war-chant/</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.futur.ca/notes/dragons-war-chant/"/><xhtml:link rel="alternate" hreflang="fr" href="https://www.futur.ca/fr/notes/le-chant-de-guerre-du-dragon/"/></url>
+  <url><loc>https://www.futur.ca/fr/notes/le-chant-de-guerre-du-dragon/</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.futur.ca/notes/dragons-war-chant/"/><xhtml:link rel="alternate" hreflang="fr" href="https://www.futur.ca/fr/notes/le-chant-de-guerre-du-dragon/"/></url>
 </urlset>
