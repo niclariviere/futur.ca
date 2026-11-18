@@ -3,7 +3,7 @@
 One-page bilingual site for FUTUR inc., served by a Cloudflare Worker. Read `HANDOFF.md` first for the why and the current state.
 
 ## Layout
-- `public/` — the site. `index.html` (EN), `fr/index.html` (FR), `thanks/`, `fr/merci/`, `404.html`, `styles.css`, `llms.txt`, `robots.txt`, `sitemap.xml`, `favicon.svg`, `brand/futur-logo.jpg`.
+- `public/` — the site. `index.html` (EN), `fr/index.html` (FR), `notes/` and `fr/notes/` (essays, one folder each), `thanks/`, `fr/merci/`, `404.html`, `styles.css`, `llms.txt`, `robots.txt`, `sitemap.xml`, `favicon.svg`, `brand/futur-logo.jpg`.
 - `src/worker.ts` — language negotiation on `/`, `/lang/:code` cookie toggle, `POST /api/contact` with anti-spam filters, to Telegram (optional `LEADS` KV backup).
 - `scripts/telegram-chat-id.sh` — prints the numeric chat id for a bot token.
 - `legacy/lovable/` — the 2025 Lovable React app. Reference only. Never serve it.
@@ -31,4 +31,5 @@ Secrets live in Cloudflare, never in the repo: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_C
 - Legion: live on Nic's own capital since April 2026, over a thousand commits, no human decision influences trades, strategies promoted paper to live on evidence.
 - wemake.music: in production, self-hosted, Stripe, zero-downtime deploys, "1,000 true fans" model.
 - futur.ca: plain HTML, no tracking, form delivered to Nic's phone.
+- The essay "The Dragon's War-Chant": Nic has built with computers since 1981 (age 13, ZX81) and professionally since 1998 (the commercial Web). The gap between is deliberately not qualified on the page.
 If any of these stops being true, change the page the same day.

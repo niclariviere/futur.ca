@@ -40,3 +40,30 @@ Why this and not "bot development": the thing that stops a business owner from u
 - Nic writes French on the iMac and English in this CLI (accent dead-keys don't survive keyboard sharing to the Mini). Accents in French copy are set by Claude when placing text.
 - Nic reviews copy in Apple Notes and exports an annotated PDF: italic underline = change, strikethrough = delete. Unmarked differences count too.
 - Nic's stance: build the site around the only credible case study, himself; storytelling yes, cyberpunk never; sharp and technical, not corporate.
+
+## Update 2026-11-18: field notes (essays) and form hardening
+Live on futur.ca. Deployed worker versions: form hardening `79346943`, essay meta tags `2f7215da`. Git: see the log; check `git status` against `origin/main` before assuming everything is pushed.
+
+### Field notes
+- First essay, "The Dragon's War-Chant" (a ZX81 summer, tolerance for ambiguity): `public/notes/dragons-war-chant/` (EN) and `public/fr/notes/le-chant-de-guerre-du-dragon/` (FR). Each has `index.html` and a 1200×630 `og.png`; the ZX81 photo (CC BY 2.0, Mike Cattell) lives in the EN folder and the FR page points at it.
+- Styles: `.essay` block appended to `public/styles.css`. Template for the next essay = copy an essay folder, change the text, the slug, the `og.png`, the canonical/hreflang/og/twitter tags, and add both URLs to `sitemap.xml` and `llms.txt`.
+- Share cards are made by rendering an HTML card in headless Brave (`--screenshot`, 1200×630). The card HTML is not in the repo; rebuild from the page's A/B/C screen block.
+- Copy edits agreed with Nic: fog section cut (product-owner residue that pulled the story out of itself); the "it had a name: ambiguity" moment folded into "The quiet part in the middle"; fog wording replaced by "the unknown" / "the quiet middle" (EN) and "l'inconnu" / "le grand silence du milieu" (FR).
+- The closing "what this has to do with your business" box (EN and FR) is Claude's first draft, kept as is by Nic for now. FR uses "vous" there and "tu" in the story, on purpose.
+- Intent: soft pull, not a blog. One page per essay, hand-picked, no CMS, no comments (spam and tracking cost), no `/notes/` index until there are 2 or 3. Essays filter for the kind of organisation Nic wants to work with.
+- Home pages link to the essay from the footer.
+- X card did not show on first try. Server side is fine (Twitterbot gets 200, PNG 1200×630). Explicit `twitter:*` tags added after. Retest in the composer, or with `?v=2`; X caches misses. Result not yet known.
+
+### Contact form, hardening round 2 (`src/worker.ts`)
+Probed locally with Telegram overridden (`wrangler dev --var TELEGRAM_BOT_TOKEN:bogus --var TELEGRAM_CHAT_ID:0`; never probe with `.dev.vars`, it holds the real secrets). Closed: free-text `channel` (now limited to the dropdown values, else blank), newlines in name/company/email/channel (collapsed), single-token or mostly non-Latin messages (refused with a visible EN/FR error). Left open on purpose: JSON POSTs without `t` skip honeypot and timing (agents are invited to POST per `llms.txt`); fluent LLM-written pitches still pass. Next escalations: bind `LEADS` KV to keep a record, then Cloudflare Turnstile. Nic should paste a few real junk leads from Telegram so the pattern can be read.
+
+### Outreach and strategy
+- LinkedIn is a no-go for now (Nic left that circle in 2018). Public presence goes on X, slowly. No mining of the old network.
+- Christian Gelinas has seen the site; around spring 2027 Nic will ask him to introduce a few decision-makers exploring AI implementation. The setup with Christian is to be refined with Nic. Parked idea: a short forwardable "what the paper stage is" blurb.
+- Nic accepts any inbound unless he doubts he can deliver or the fit feels likely to turn sour. The essays are the filter.
+
+### Next session
+1. Retest the X card (composer preview, then `?v=2`).
+2. Content calendar for essays: subjects, tone, cadence, which kind of organisation each one filters for.
+3. Decide on the reply form (small worker change) and on `LEADS` KV.
+4. Rewrite the closing boxes in Nic's own voice when he is ready.
